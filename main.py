@@ -12,17 +12,16 @@ def final_score(p_cards, h_cards):
     print(f"   Your final hand: {p_cards}, final score: {sum(p_cards)}")
     print(f"   Computer's final hand: {h_cards} final_score: {sum(h_cards)}")
 
-def new_hand(x_cards):
+def hit(x_cards):
     new_card = random.choice(cards)
     if new_card == 11:
-        new_hand = x_cards.append(new_card)
-        total = sum(new_hand)
+        total = sum(x_cards) + new_card
         if total > 21:
-            return x_cards.append(1)
+            return 1
         else:
-            return new_hand
+            return 11
     else:
-        return x_card.append(new_card)
+        return new_card
 
 
 while play:
@@ -42,7 +41,7 @@ while play:
         while bidding:
             hit_me = input(f"Type 'y' to get another card, type 'n' to pass: ").lower()
             if hit_me == 'y':
-                player_cards.append(random.choice(cards))
+                player_cards.append(hit(player_cards))
                 if sum(player_cards) > 21:
                     bidding = False
                 else:
@@ -61,7 +60,7 @@ while play:
             print("Draw.")
         else:
             while sum(house_cards) < sum(player_cards):
-                house_cards.append(random.choice(cards))
+                house_cards.append(hit(house_cards))
                 if sum(house_cards) > 21:
                     final_score(player_cards, house_cards)
                     print(f"You win!")
